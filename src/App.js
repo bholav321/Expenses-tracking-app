@@ -42,11 +42,11 @@ function App() {
       }
     });
   };
-  
+  const totalAmount = dataList.reduce((total, item) => parseInt(total) + parseInt(item.itemAmt), 0);
   return (
     <>
-      <section className='container-fluid position-fixed' style={{ backgroundColor: "#f1f3f6", height: '80vh' }}>
-        <div className='container bg-white mt-4 rounded' style={{ boxShadow: '0px 1px 1px 0px grey' }}>
+      <section className='container-fluid position-fixed' style={{ backgroundColor: "#f1f3f6", height: '100vh' }}>
+        <div className='container bg-white mt-4 p-3 rounded' style={{ boxShadow: '0px 1px 1px 0px grey' }}>
           <h3 className='text-center'>Expenses Tracker</h3>
           <div className='row form-group'>
             <label className='fw-bold'>Item Name: </label>
@@ -66,24 +66,32 @@ function App() {
           </div>
         </div>
         <div className='container rounded bg-white mt-2'>
-          {dataList.map((data, index) => <div key={index} className='row border'>
-            <div className='col-md-2'>
-              <h3>
-                {data.itemName}:
-              </h3>
+          {dataList.map((data, index) => (
+            <div key={index} className='row border'>
+              <div className='col-6'>
+                <h3>{data.itemName}:</h3>
+              </div>
+              <div className='col-6'>
+                <h3>₹ {data.itemAmt}</h3>
+              </div>
             </div>
-            <div className='col-md-2'>
-              <h3>
-              ₹ {data.itemAmt}
-              </h3>
-            </div>
-          </div>)}
+          ))}
+
+
         </div>
+        <div className='bg-white mt-4 container'>
         <div className='row'>
-          <div className='col-md-4'>
-        
+            <div className='col-md-4 col-sm-12'>
+              <h3>Total Item:  {dataList.length}</h3>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-md-4 col-sm-12'>
+              <h3>Total Amount: ₹ {totalAmount}</h3>
+            </div>
           </div>
         </div>
+
       </section>
     </>
   );
